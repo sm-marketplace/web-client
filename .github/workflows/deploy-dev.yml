@@ -1,14 +1,14 @@
-name: Deploy (PROD)
+name: Deploy (DEV)
 
 env:
-  STAGE: PROD
-  BUCKET_NAME: smmp-web-client
+  STAGE: DEV
+  BUCKET_NAME: smmp-web-client #TODO: create bucket for DEV
   PROJECT_NAME: web-client
 
 on:
   push:
     branches:
-    - main
+    - dev
 
 jobs:
   deploy:
