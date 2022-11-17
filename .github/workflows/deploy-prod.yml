@@ -1,4 +1,9 @@
-name: S3 Deploy
+name: S3 Deploy (PROD)
+
+env:
+  STAGE: PROD
+  BUCKET_NAME: smmp-web-client
+  PROJECT_NAME: web-client
 
 on:
   push:
@@ -35,4 +40,4 @@ jobs:
 
     - name: Deploy
       if: success()
-      run: aws s3 sync ./dist/web-client s3://smmp-web-client
+      run: aws s3 sync ./dist/$PROJECT_NAME s3://$BUCKET_NAME
