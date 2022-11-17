@@ -2,7 +2,7 @@ name: Deploy (DEV)
 
 env:
   STAGE: DEV
-  BUCKET_NAME: smmp-web-client #TODO: create bucket for DEV
+  BUCKET_NAME: smmp-web-client-dev
   PROJECT_NAME: web-client
 
 on:

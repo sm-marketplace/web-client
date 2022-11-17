@@ -2,7 +2,7 @@ name: Deploy (PROD)
 
 env:
   STAGE: PROD
-  BUCKET_NAME: smmp-web-client
+  BUCKET_NAME: smmp-web-client-prod
   PROJECT_NAME: web-client
 
 on:
