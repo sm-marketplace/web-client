@@ -1,14 +1,14 @@
-name: Deploy (PROD)
+name: Deploy (DEV)
 
 env:
-  STAGE: PROD
-  BUCKET_NAME: smmp-web-client-prod
+  STAGE: DEV
+  BUCKET_NAME: smmp-web-client-dev
   PROJECT_NAME: web-client
 
 on:
   push:
     branches:
-    - main
+    - dev
 
 jobs:
   deploy:
