@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  ENV: 'DEV',
+  CHAINS_ID: [/*'0x1',*/ '0x13881', '0x5', '0x539'],
+  // PROVIDER_URL: "https://rpc-mumbai.maticvigil.com",
+  // CONTRACT_ADDRESS: "0xC39c4B07C476b1b6F48597720Bb7e8b12eE1306a",
+  // CHAIN_ID: "5"
 };
 
 /*

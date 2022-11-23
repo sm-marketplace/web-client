@@ -1,0 +1,18 @@
+<p-card header="Autenticación" subheader="San Marcos Marketplace" [style]="{width: '360px'}" styleClass="p-card-shadow">
+  <ng-template pTemplate="header">
+      <img alt="Card" src="https://beaconvcfund.sgp1.cdn.digitaloceanspaces.com/2022/06/metaverse-cover-1288x724-1.jpeg">
+  </ng-template>
+  <p>Necesita tener Metamask instalado</p>
+  <ng-template pTemplate="footer">
+      <p-button (click)="handleConnect()" label="Conectar" icon="pi pi-check"></p-button>
+      <a pButton label="Instalar" icon="pi pi-download" [style]="{'margin-left': '.5em'}"
+      href="https://metamask.io/download/" target="_blank"
+      ></a>
+  </ng-template>
+</p-card>
+
+<!-- <pre>
+  Address User
+  {{authService.addressUser | async | json}}
+  {{authService.loginUser | async | json}}
+</pre> -->
