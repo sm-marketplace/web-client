@@ -13,12 +13,16 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { makeFactory } from './core/initializers/factory';
 import { SessionRecoverInitializer } from './core/initializers/session-recover.init';
+import { CreateComponent } from './pages/create/create.component';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthComponent
+    AuthComponent,
+    CreateComponent,
+    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { catchError, map, Observable, of, tap } from 'rxjs';
-import { WalletService } from '../services/wallet.service';
-import { LOG } from '../utils/log.utils';
+import { WalletService } from '../../services/wallet.service';
+import { LOG } from '../../utils/log.utils';
 
 @Injectable({
   providedIn: 'root'
