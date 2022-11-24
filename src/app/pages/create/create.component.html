@@ -1,1 +1,34 @@
-<p>create works!</p>
+<h2 class="mb-5">Create</h2>
+
+<form [formGroup]="form" class="py-4" (ngSubmit)="onSubmit()">
+  <div class="d-flex mb-5">
+    <span class="p-float-label">
+      <input formControlName="name" id="float-input" class="name" type="text" pInputText>
+      <label for="float-input">Nombre</label>
+    </span>
+
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">FC</span>
+      <input formControlName="price" type="text" pInputText placeholder="Price">
+      <span class="p-inputgroup-addon">.00</span>
+    </div>
+  </div>
+
+  <div class="col-12 mb-5">
+    <span class="p-float-label">
+      <textarea formControlName="description" id="float-input" rows="4" pInputTextarea></textarea>
+      <label for="float-input">Summary</label>
+    </span>
+  </div>
+
+  <div class="col-12 mb-5">
+    <h5>File</h5>
+    <p-fileUpload #fileInput [auto]="true" [multiple]="false" accept="image/*"
+      [maxFileSize]="1000000">
+    </p-fileUpload>
+  </div>
+
+  <div class="col-12 d-flex justify-content-end">
+    <button pButton [disabled]="!form.valid || !fileInput.files[0]" style="margin-left:auto" label="Create" type="submit"></button>
+  </div>
+</form>

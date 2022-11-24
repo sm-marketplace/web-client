@@ -4,6 +4,10 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -11,7 +15,11 @@ import {ToolbarModule} from 'primeng/toolbar';
     ButtonModule,
     CardModule,
     ToastModule,
-    ToolbarModule
+    ToolbarModule,
+    InputTextModule,
+    InputTextareaModule,
+    FileUploadModule,
+    HttpClientModule,
   ],
   imports: [
     CommonModule,
