@@ -39,8 +39,6 @@ export class Web3AuthService {
   async handleIdChainChanged() {
     const chainId: string = await window.ethereum.request({ method: 'eth_chainId' });
 
-    console.log("chainId", chainId);
-
     if (this.chainIds.includes(chainId)) {
       this.handleAccountsChanged();
     } else {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { makeFactory } from './core/initializers/factory';
+import { SessionRecoverInitializer } from './core/initializers/session-recover.init';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [MessageService],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: makeFactory<SessionRecoverInitializer>(),
+      deps: [SessionRecoverInitializer],
+      multi: true
+    },
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

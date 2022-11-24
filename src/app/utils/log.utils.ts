@@ -1,5 +1,7 @@
 // 'background: #222; color: #bada55'
 
+import { environment } from "src/environments/environment";
+
 export class LOG {
   
   // danger success warning info 
@@ -18,6 +20,8 @@ export class LOG {
   }
 
   static msg(message: string, type: 'success' | 'error' | 'warning' | 'info') {
+
+    if (environment.ENV == 'PROD') return;
     
     const msg = message + ' | ' + type;
     const color = this.getColor(type);

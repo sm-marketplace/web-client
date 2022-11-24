@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Web3AuthService } from 'src/app/services/web3-auth.service';
-import { tap, filter, takeUntil } from 'rxjs/operators'
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ErrorMsg } from 'src/app/core/messages/error.messages';
+import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,18 +16,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<boolean>();
 
   constructor(
-    public authService: Web3AuthService,
+    private router: Router,
     private toastr: ToastrService,
-    private route: Router,
-    ) {
-
-      this.authService.loggedIn$.pipe(
-        takeUntil(this.destroy$),
-        filter(logged => !!logged),
-        tap(
-          _ => this.route.navigate(['home'])
-        )
-      ).subscribe();
+    private walletService: WalletService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +30,18 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   handleConnect() {
-    this.authService.connect();
+    this.walletService.connect().pipe(
+      catchError(
+        (err) => { 
+          this.toastr.error(
+            ErrorMsg[err.constructor.name] ||
+            ErrorMsg.DEFAULT
+          );
+          return of(undefined);
+        }
+      )
+    ).subscribe(
+      () => this.router.navigate(['home'])
+    );
   }
 }

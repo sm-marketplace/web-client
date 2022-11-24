@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SessionRequiredGuard } from './guards/session-required.guard';
+import { ConnectionRequiredGuard } from './guards/connection-required.guard';
 import { AuthComponent } from './pages/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [SessionRequiredGuard],
+    canActivate: [ConnectionRequiredGuard],
     component: HomeComponent,
   },
   {

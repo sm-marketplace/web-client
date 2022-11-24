@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { WalletService } from './services/contract.service';
 
 @Component({
   selector: 'app-root',
