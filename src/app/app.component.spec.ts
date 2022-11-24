@@ -26,10 +26,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('web-client');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('web-client app is running!');
-  });
 });
