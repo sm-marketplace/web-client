@@ -16,7 +16,7 @@ export class WalletService {
   isConnected$ = this.isConnected.asObservable();
   accountAddress$ = this.accountAddress.asObservable();
 
-  provider: unknown = null;
+  provider: any = null;
 
   constructor() { }
 

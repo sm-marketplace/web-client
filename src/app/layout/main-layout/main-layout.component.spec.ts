@@ -1,4 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { PrimengModule } from 'src/app/primeng/primeng.module';
 
 import { MainLayoutComponent } from './main-layout.component';
 
@@ -8,7 +12,11 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainLayoutComponent ]
+      declarations: [ MainLayoutComponent ],
+      imports: [
+        BrowserModule,
+        PrimengModule,
+      ]
     })
     .compileComponents();
   });

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
+import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
   selector: 'app-create',
