@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
+import { MarketplaceService } from 'src/app/services/marketplace.service';
 import { WalletService } from 'src/app/services/wallet.service';
+import Web3 from 'web3';
 
 @Component({
   selector: 'app-create',
@@ -16,6 +18,7 @@ export class CreateComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
+    private mpService: MarketplaceService,
   ) { }
 
   ngOnInit(): void {
@@ -38,14 +41,19 @@ export class CreateComponent implements OnInit {
 
   onSubmit() {
     const file: File = this.fileInput.files[0];
+    const wei = Web3.utils.toWei(this.form.value.price);
 
     const value = {
       ...this.form.value,
-      file,
+      file, wei
     }
     
     console.log({value});
-    
-    return value;
+
+    this.mpService.createAsset(
+      value.file.name, wei.toString() 
+    ).subscribe(
+      (res: any) => console.log("New Item: ", res)
+    );
   }
 }

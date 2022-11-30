@@ -37,7 +37,7 @@ export class WalletService {
         }
 
         this.provider = provider,
-        this.accountAddress.next(accountAddress);
+        this.accountAddress.next(accountAddress[0]);
         this.isConnected.next(true);
       } ),
     )
