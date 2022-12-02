@@ -21,6 +21,39 @@ img {
   height: auto;
 }
 
-:host ::ng-deep.p-card-header {
-  border-bottom: 4px solid #ffffff1c;
+:host ::ng-deep{
+  .p-card {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .p-card-header {
+    border-bottom: 4px solid #ffffff1c;
+    height: 250px;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .p-card-content {
+    height: 140px;
+    overflow-y: auto;
+  }
+
+  .p-card-body {
+    height: 326px;
+    // margin-top: auto;
+  }
+
+  .p-card-subtitle {
+    margin-bottom: 0.5rem;
+    color: rgb(1 254 135);
+    font-weight: 700;
+  }
+
+  .p-card-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 }
+

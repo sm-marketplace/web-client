@@ -42,7 +42,6 @@ app-logo {
 
 @media only screen and (max-width: 768px) {
   p-toolbar ::ng-deep.p-toolbar {
-    // flex-direction: column !important;
     padding: 8px !important;
     justify-content: center !important;
   }
