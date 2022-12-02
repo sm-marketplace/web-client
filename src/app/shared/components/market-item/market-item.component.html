@@ -1,4 +1,4 @@
-<p-card [header]="item.metadata.name || 'Desconocido'" [subheader]="item.seller" styleClass="p-card-shadow">
+<p-card [header]="item.metadata.name || 'Desconocido'" [subheader]="(item.price | weiToEth) + ' ETH'" styleClass="p-card-shadow">
   <ng-template pTemplate="header">
       <img appImageLoader alt="Card" [src]="item.uri | ipfsURI">
   </ng-template>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './components/loader/loader.component';
 import { IpfsURIPipe } from './pipes/ipfs-uri.pipe';
 import { ImageLoaderDirective } from './directives/image-loader.directive';
+import { WeiToEthPipe } from './pipes/wei-to-eth.pipe';
 
 
 
@@ -11,6 +12,7 @@ import { ImageLoaderDirective } from './directives/image-loader.directive';
     LoaderComponent,
     IpfsURIPipe,
     ImageLoaderDirective,
+    WeiToEthPipe,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { ImageLoaderDirective } from './directives/image-loader.directive';
     LoaderComponent,
     IpfsURIPipe,
     ImageLoaderDirective,
+    WeiToEthPipe,
   ]
 })
 export class CoreModule { }

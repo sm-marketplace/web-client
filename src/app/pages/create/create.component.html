@@ -7,10 +7,10 @@
       <label for="float-input">Nombre</label>
     </span>
 
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">FC</span>
+    <div class="p-inputgroup ms-4">
+      <!-- <span class="p-inputgroup-addon"></span> -->
       <input formControlName="price" type="text" pInputText placeholder="Price">
-      <span class="p-inputgroup-addon">.00</span>
+      <span class="p-inputgroup-addon">ETH</span>
     </div>
   </div>
 
@@ -24,7 +24,7 @@
   <div class="col-12 mb-5">
     <h5>File</h5>
     <p-fileUpload #fileInput [auto]="true" [multiple]="false" accept="image/*"
-      [maxFileSize]="1000000">
+      [maxFileSize]="10000000">
     </p-fileUpload>
   </div>
 
