@@ -32,7 +32,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   handleConnect() {
     this.walletService.connect().pipe(
       catchError(
-        (err) => { 
+        (err) => {
+          console.error(err);
           this.toastr.error(
             ErrorMsg[err.constructor.name] ||
             ErrorMsg.DEFAULT

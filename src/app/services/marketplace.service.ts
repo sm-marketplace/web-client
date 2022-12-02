@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, forkJoin, switchMap, tap } from "rxjs";
+import { BehaviorSubject, forkJoin, map, switchMap, tap } from "rxjs";
+import { Loading } from "../core/decorators/catch-loading.decorator";
+import { IPinataMetadata } from "../core/interfaces/pinata-metadata.interface";
 import { ContractService } from "./contract.service";
+import { HttpPinataService } from "./http-pinata.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +16,25 @@ export class MarketplaceService {
   itemsToSell = new BehaviorSubject<any[] | undefined>(undefined); 
   itemsToSell$ = this.itemsToSell.asObservable();
 
-  constructor(private contract: ContractService) {
+  constructor(
+    private contract: ContractService,
+    private httpPinataService: HttpPinataService) {
+    
     this.fetch().subscribe();
   }
 
-  createAsset(tokenURI: string, wei: string) {
+  @Loading()
+  createItem(file: File, metadata: IPinataMetadata, wei: string) {
     const commission = this.getCommission() as string;
 
-    return this.contract.mpNewAsset(
-      commission, {tokenURI, wei}
-    ).pipe(
+    return this.httpPinataService.uploadFile(file, metadata).pipe(
+      map(res => res.pinata.IpfsHash),
+      map(hash => `ipfs://${hash}`),
+      switchMap(uri => this.contract.mpNewAsset(
+        commission, {tokenURI: uri, wei}
+      )),
       switchMap(_ => this.fetchItemsToSell()),
-    );
+    )
   }
 
   fetch() {

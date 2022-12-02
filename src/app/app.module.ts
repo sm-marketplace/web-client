@@ -15,6 +15,8 @@ import { makeFactory } from './core/initializers/factory';
 import { SessionRecoverInitializer } from './core/initializers/session-recover.init';
 import { CreateComponent } from './pages/create/create.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { LoadingStatusFactory } from './core/services/loading.status.factory';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
     ToastrModule.forRoot(), // ToastrModule added
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
   ],
   providers: [
     {
@@ -41,6 +44,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
       multi: true
     },
     MessageService,
+    LoadingStatusFactory,
   ],
   bootstrap: [AppComponent]
 })

@@ -8,8 +8,9 @@ import { MetaMaskInpageProvider } from "@metamask/providers";
 // import contractFile from "../../../_contract.js";
 import SMMarketplace from '../../../artifacts/contracts/SMMarketplace.sol/SMMarketplace.json';
 import { ContractService } from 'src/app/services/contract.service';
-import { tap } from 'rxjs';
+import { delay, of, tap } from 'rxjs';
 import { MarketplaceService } from 'src/app/services/marketplace.service';
+import { Loading } from 'src/app/core/decorators/catch-loading.decorator';
 
 @Component({
   selector: 'app-home',
@@ -27,9 +28,20 @@ export class HomeComponent implements OnInit {
     //   tap(res => console.log({res}))
     // ).subscribe()
 
+    // this.getFoo().pipe(
+    //   tap(data => console.log("the data is:", data))
+    // ).subscribe();
+
   }
 
   ngOnInit(): void {
   }
+
+  // @Loading()
+  // getFoo() {
+  //   return of("the data").pipe(
+  //     delay(2000),
+  //   );
+  // }
 
 }
