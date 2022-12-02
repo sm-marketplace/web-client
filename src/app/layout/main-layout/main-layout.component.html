@@ -1,6 +1,6 @@
 <p-toolbar>
   <div class="p-toolbar-group-left">
-    <h2>SM Marketplace</h2>
+    <app-logo (click)="goHome()"></app-logo>
   </div>
   
   <div class="p-toolbar-group-right">
@@ -10,8 +10,8 @@
   </div>
 </p-toolbar>
 
-<img class="banner" src="https://www.cybavo.com/img/cms/nfts-banner.png" alt="">
+<!-- <img class="banner" src="https://www.cybavo.com/img/cms/nfts-banner.png" alt=""> -->
 
-<main>
+<main class="container mt-5">
   <router-outlet></router-outlet>
 </main>

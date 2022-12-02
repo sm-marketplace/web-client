@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { tap } from "rxjs";
+import { catchError, of, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { IPinataMetadata } from "../core/interfaces/pinata-metadata.interface";
 import { LOG } from "../utils/log.utils";
@@ -22,6 +22,18 @@ export class HttpPinataService {
 
     return this.http.post<any>(URL, fd).pipe(
       tap(res => res && LOG.msg("File uploaded", "success")),
+    );
+  }
+
+  getFile(hash: string) {
+    const URL = `${environment.API}/item/${hash}`;
+
+    return this.http.get(URL).pipe(
+      tap(res => res && LOG.msg("Get file", "success")),
+      catchError((err) => {
+        console.error(err);
+        return of(undefined);
+      })
     );
   }
 

@@ -1,0 +1,9 @@
+<p-card [header]="item.metadata.name || 'Desconocido'" [subheader]="item.seller" styleClass="p-card-shadow">
+  <ng-template pTemplate="header">
+      <img appImageLoader alt="Card" [src]="item.uri | ipfsURI">
+  </ng-template>
+  <p>{{ item.metadata.description || 'Descripcion no encontrada' }}</p>
+  <ng-template pTemplate="footer">
+      <p-button label="Comprar" icon="pi pi-check"></p-button>
+  </ng-template>
+</p-card>

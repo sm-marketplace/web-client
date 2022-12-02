@@ -17,6 +17,7 @@ import { CreateComponent } from './pages/create/create.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { LoadingStatusFactory } from './core/services/loading.status.factory';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    SharedModule,
   ],
   providers: [
     {

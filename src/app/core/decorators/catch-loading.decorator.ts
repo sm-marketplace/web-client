@@ -1,23 +1,10 @@
 import { finalize, map, Observable, of, switchMap, tap } from "rxjs";
 import { LoadingStatusFactory } from "../services/loading.status.factory";
 
-export function Loading() {
+export function useLoading() {
   return function (target: any, memberName: string, descriptor: PropertyDescriptor) {
     return {
       get() {
-
-        // const wrapperFn = (...args: any[]) => {
-        //   const fn = descriptor.value;
-        //   const loadingService = LoadingStatusFactory.controller;
-
-        //   console.log('loading...');
-        //   loadingService.startCall();
-        //   const res$: Observable<any> = fn.apply(this, args);
-        //   return res$.pipe(
-        //     tap((_) => console.log('loading finish')),
-        //     tap( _ => loadingService.endCall()),
-        //   );
-        // }
 
         const wrapperFn = (...args: any[]) => {
           const fn = descriptor.value;

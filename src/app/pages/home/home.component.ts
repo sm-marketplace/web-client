@@ -10,7 +10,7 @@ import SMMarketplace from '../../../artifacts/contracts/SMMarketplace.sol/SMMark
 import { ContractService } from 'src/app/services/contract.service';
 import { delay, of, tap } from 'rxjs';
 import { MarketplaceService } from 'src/app/services/marketplace.service';
-import { Loading } from 'src/app/core/decorators/catch-loading.decorator';
+import { useLoading } from 'src/app/core/decorators/catch-loading.decorator';
 
 @Component({
   selector: 'app-home',

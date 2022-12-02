@@ -1,7 +1,22 @@
 
-<h3>Home page</h3>
+<h3>Marketplace</h3>
 
-<pre>
+<div *ngIf="itemsToSell$ | async as items" class="wrapper mt-4">
+
+  <app-market-item *ngFor="let item of items"
+  [item]="item"
+  ></app-market-item>
+
+</div>
+
+<!-- <app-market-item></app-market-item> -->
+
+<!-- <div *ngFor="let item of itemsToSell$ | async">
+  <img appImageLoader [src]="item.uri | ipfsURI" alt="" srcset="">
+</div> -->
+<!-- <img appImageLoader src="https://ipfs.io/ipfs/QmW7L4Yaq5No6dQX2t57a1Wuo49LarV3bn3wYjnDaT67Lk" alt="" srcset=""> -->
+
+<!-- <pre>
 
 commission: 
 {{commission$ | async}}
@@ -9,4 +24,4 @@ commission:
 items to sell:
 {{itemsToSell$ | async | json}}
 
-</pre>
+</pre> -->
