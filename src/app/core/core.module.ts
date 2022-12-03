@@ -4,6 +4,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { IpfsURIPipe } from './pipes/ipfs-uri.pipe';
 import { ImageLoaderDirective } from './directives/image-loader.directive';
 import { WeiToEthPipe } from './pipes/wei-to-eth.pipe';
+import { BreakpointPipe } from './pipes/breakpoint.pipe';
 
 
 
@@ -13,6 +14,7 @@ import { WeiToEthPipe } from './pipes/wei-to-eth.pipe';
     IpfsURIPipe,
     ImageLoaderDirective,
     WeiToEthPipe,
+    BreakpointPipe,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { WeiToEthPipe } from './pipes/wei-to-eth.pipe';
     IpfsURIPipe,
     ImageLoaderDirective,
     WeiToEthPipe,
+    BreakpointPipe,
   ]
 })
 export class CoreModule { }

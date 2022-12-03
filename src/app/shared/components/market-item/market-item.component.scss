@@ -33,6 +33,16 @@ img {
     height: 250px;
     overflow: hidden;
     flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    background-image: var(--img-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    background-image: linear-gradient( to bottom, rgb(0 0 0 / 72%), rgb(0 0 0 / 84%) ), var(--img-url);
+    background-attachment: local;
+    background-size: auto;
   }
 
   .p-card-content {

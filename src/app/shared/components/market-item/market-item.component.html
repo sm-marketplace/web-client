@@ -1,9 +1,9 @@
-<p-card [header]="item.metadata.name || 'Desconocido'" [subheader]="(item.price | weiToEth) + ' ETH'"
+<p-card [header]="_item.metadata.name || 'Desconocido'" [subheader]="(_item.price | weiToEth) + ' ETH'"
   styleClass="p-card-shadow">
   <ng-template pTemplate="header">
-    <img appImageLoader alt="Card" [src]="item.uri | ipfsURI">
+    <img appImageLoader alt="Card" [src]="_item.uri | ipfsURI">
   </ng-template>
-  {{ item.metadata.description || 'Descripcion no encontrada' }}
+  {{ _item.metadata.description || 'Descripcion no encontrada' }}
   <ng-template pTemplate="footer">
     <button pButton pRipple type="button" 
     icon="pi pi-eye" 

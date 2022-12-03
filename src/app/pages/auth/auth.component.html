@@ -1,13 +1,13 @@
-<p-card header="San Marcos Marketplace" subheader="Acceso con Metamask" [style]="{width: '360px'}" styleClass="p-card-shadow">
+<p-card header="San Marcos Marketplace" subheader="Acceso con Metamask"
+  styleClass="p-card-shadow" class="animate__animated animate__fadeIn">
   <ng-template pTemplate="header">
-      <img alt="Card" src="https://petnewsdaily.com/wp-content/uploads/2022/01/PetMetaverse-1200x630-min.png">
+    <img class="animate__animated animate__fadeIn" src="https://petnewsdaily.com/wp-content/uploads/2022/01/PetMetaverse-1200x630-min.png">
   </ng-template>
   <!-- <p>Necesita tener Metamask instalado</p>/ -->
   <ng-template pTemplate="footer">
-      <p-button (click)="handleConnect()" label="Conectar" icon="pi pi-sign-in"></p-button>
-      <a pButton label="Instalar" icon="pi pi-download" [style]="{'margin-left': '.5em'}"
-      href="https://metamask.io/download/" target="_blank"
-      ></a>
+    <p-button (click)="handleConnect()" label="Conectar" icon="pi pi-sign-in"></p-button>
+    <a pButton label="Instalar" icon="pi pi-download"
+      href="https://metamask.io/download/" target="_blank"></a>
   </ng-template>
 </p-card>
 

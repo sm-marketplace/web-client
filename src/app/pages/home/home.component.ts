@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   commission$ = this.mpService.commission$;
   itemsToSell$ = this.mpService.itemsToSell$.pipe(
-    map(items => items && items.reverse())
+    map(items => items && [...items].reverse())
   );
 
   constructor(private mpService: MarketplaceService) {

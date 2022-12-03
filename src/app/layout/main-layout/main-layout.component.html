@@ -4,9 +4,17 @@
   </div>
   
   <div class="p-toolbar-group-right">
-    <a pButton routerLink="home" label="Shop" class="p-button-link" icon="pi pi-shopping-cart" ></a>
-    <a pButton routerLink="create" label="Crear" class="p-button-link" icon="pi pi-plus"></a>
-    <p-button icon="pi pi-sign-out" class="p-button-danger ms-4"></p-button>
+    <a pButton routerLink="home" label="Shop" class="p-button-link" icon="pi pi-shopping-cart"
+    [class.p-button-sm]="['xs'] | breakpoint | async"
+    ></a>
+    <a pButton routerLink="create" label="Crear" class="p-button-link" icon="pi pi-plus"
+    [class.p-button-sm]="['xs'] | breakpoint | async"
+    ></a>
+    <a pButton type="button" icon="pi pi-sign-out" class="p-button-text p-button-rounded p-button-danger ms-4"
+    [class.p-button-sm]="['xs'] | breakpoint | async"
+    href="https://metamask.zendesk.com/hc/en-us/articles/360059535551-Disconnect-wallet-from-a-dapp"
+    target="_blank"
+    ></a>
   </div>
 </p-toolbar>
 
