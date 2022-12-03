@@ -1,0 +1,69 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+p-card {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0.4px 0.1px 8px #ffffff2e, 18px 18px 0 4px #2b282800;
+}
+
+img {
+  object-fit: contain;
+  display: block;
+  max-width: 100%;
+  max-height: 262px;
+  width: auto;
+  height: auto;
+}
+
+:host ::ng-deep{
+  .p-card {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .p-card-header {
+    border-bottom: 4px solid #ffffff1c;
+    height: 250px;
+    overflow: hidden;
+    flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    background-image: var(--img-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    background-image: linear-gradient( to bottom, rgb(0 0 0 / 72%), rgb(0 0 0 / 84%) ), var(--img-url);
+    background-attachment: local;
+    background-size: auto;
+  }
+
+  .p-card-content {
+    height: 140px;
+    overflow-y: auto;
+  }
+
+  .p-card-body {
+    height: 326px;
+    // margin-top: auto;
+  }
+
+  .p-card-subtitle {
+    margin-bottom: 0.5rem;
+    color: rgb(1 254 135);
+    font-weight: 700;
+  }
+
+  .p-card-footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+

@@ -3,10 +3,15 @@
 @import "primeng/resources/themes/lara-dark-teal/theme.css";
 @import "primeng/resources/primeng.min.css";
 @import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "animate.css/animate.css";
+
 
 body {
   background-color: var(--surface-a) !important;
-  font-family: var(--font-family) !important;
+  // font-family: var(--font-family) !important;
+  // font-family: 'Quicksand', sans-serif;
+  font-family: 'Rubik', sans-serif !important;
   color: var(--text-color) !important;
 }
 
@@ -71,4 +76,45 @@ p, h1, h2, h3, h4, h5, h6 {
 */
 #root, #__next {
   isolation: isolate;
+}
+
+
+// SCROLLBAR
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 3px;
+	// transition: background 0.5s;
+}
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+// 	background: #555;
+// }
+
+/* Ripple effect */
+.ripple {
+	background-position: center;
+	transition: background 0.8s;
+}
+.ripple:hover {
+	background: inherit radial-gradient(circle, transparent 1%, #47a7f5 1%)
+		center/15000%;
+}
+.ripple:active {
+	background-color: inherit;
+	background-size: 100%;
+	transition: background 0s;
 }

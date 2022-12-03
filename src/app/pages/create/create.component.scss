@@ -8,6 +8,34 @@ textarea {
   width: 100%;
 }
 
+input {
+  width: 100%;
+}
+
+.nameprice {
+  display: flex;
+  // flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
+  column-gap: 8px;
+  row-gap: 24px;
+}
+
 .name {
-  min-width: 575px;
+  flex-grow: 1;
+  flex-basis: 314px;
+  flex-shrink: 0;
+}
+
+.price {
+  min-width: 180px;
+  flex-basis: 0px;
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 788px) {
+  // .nameprice {
+  //   display: flex;
+  //   flex-wrap: wrap-reverse;
+  //   gap: 8px;
+  // }
 }

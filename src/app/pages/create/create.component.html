@@ -1,30 +1,29 @@
-<h2 class="mb-5">Create</h2>
+<h2 [class.mb-5]="['lg', 'md'] | breakpoint | async">Crear NFT</h2>
 
-<form [formGroup]="form" class="py-4" (ngSubmit)="onSubmit()">
-  <div class="d-flex mb-5">
-    <span class="p-float-label">
-      <input formControlName="name" id="float-input" class="name" type="text" pInputText>
+<form [formGroup]="form" class="py-4 animate__animated animate__fadeIn" (ngSubmit)="onSubmit()">
+  <div class="d-flex mb-5 nameprice">
+    <span class="p-float-label name">
+      <input formControlName="name" id="float-input" type="text" pInputText>
       <label for="float-input">Nombre</label>
     </span>
 
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">FC</span>
-      <input formControlName="price" type="text" pInputText placeholder="Price">
-      <span class="p-inputgroup-addon">.00</span>
+    <div class="p-inputgroup price">
+      <input formControlName="price"  type="text" pInputText placeholder="Price">
+      <span class="p-inputgroup-addon">ETH</span>
     </div>
   </div>
 
-  <div class="col-12 mb-5">
+  <div class="col-12 mb-4">
     <span class="p-float-label">
       <textarea formControlName="description" id="float-input" rows="4" pInputTextarea></textarea>
-      <label for="float-input">Summary</label>
+      <label for="float-input">Descripción</label>
     </span>
   </div>
 
-  <div class="col-12 mb-5">
-    <h5>File</h5>
-    <p-fileUpload #fileInput [auto]="true" [multiple]="false" accept="image/*"
-      [maxFileSize]="1000000">
+  <div class="col-12 mb-4">
+    <h5>Carga el archivo</h5>
+    <p-fileUpload #fileInput [auto]="true" [multiple]="false" accept="image/*" chooseLabel="Buscar"
+      [maxFileSize]="10000000">
     </p-fileUpload>
   </div>
 
