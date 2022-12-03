@@ -3,7 +3,7 @@
 
 <div *ngIf="itemsToSell$ | async as items" class="wrapper mt-4">
 
-  <app-market-item *ngFor="let item of items"
+  <app-market-item *ngFor="let item of items" class="animate__animated animate__fadeInDown"
   [item]="item"
   ></app-market-item>
 
