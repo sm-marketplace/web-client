@@ -1,27 +1,112 @@
-# WebClient
+# SM Marketplace - WebClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+## Requerimientos
+- Node 16
+- Cuenta en [Pinata](https://www.pinata.cloud/)
 
-## Development server
+## Docker (in progress)
+**Require:** contract-artifact.json 
+```
+//contract-artifact.json
+{
+  "network": "localhost", // network 
+  "address": <CONTRACT_ADDRESS>, // address of deployed contract
+  "json": <JSON_CONTRACT_ARTIFACT> // build artifact
+}
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
 
-## Code scaffolding
+```
+sudo docker run --name smmp-web-client -d -p 4200:8443 \
+-e CONTRACT_ARTIFACT_STR= $(cat contract-artifact.json) \
+-e ENV=DEV
+-e PROVIDER=http://localhost:8545
+-e API=http://localhost:3000
+-e IPFS_FILES_URL=https://ipfs.io/ipfs
+rogrp6/smmp-web-client:dev
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development
+### 1 - Smart contract
 
-## Build
+```bash
+(bash)
+docker pull rogrp6/smmp-smart-contract
+docker stop smmp-smart-contract # limpieza, ignore si da error
+docker rm smmp-smart-contract # limpieza, ignore si da error
+docker run --name smmp-smart-contract -p 8545:8545 -d rogrp6/smmp-smart-contract
+docker logs smmp-smart-contract > accounts.txt # cuentas creadas para la red
+docker exec -it smmp-smart-contract /bin/sh -c "\
+  cd /usr/src/app; \
+  npx hardhat run scripts/deploy.js --network localhost"
+export CONTRACT_ARTIFACT_STR=$(\
+  docker exec -it smmp-smart-contract /bin/sh -c "node get-artifact.js")
+envsubst < ./ci/templates/__contract.js > ./src/__contract.js # set artifact
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```batch
+(windows batch)
+docker pull rogrp6/smmp-smart-contract
+docker stop smmp-smart-contract # limpieza, ignore si da error
+docker rm smmp-smart-contract # limpieza, ignore si da error
+docker run --name smmp-smart-contract -p 8545:8545 -d rogrp6/smmp-smart-contract
+docker logs smmp-smart-contract > accounts.txt # cuentas creadas para la red
+docker exec -it smmp-smart-contract /bin/sh -c "^
+  cd /usr/src/app; ^
+  npx hardhat run scripts/deploy.js --network localhost"
+docker exec -it smmp-smart-contract /bin/sh -c "node get-artifact.js" > contract-artifact.json
+node __contract.make.js > src\__contract.js
+```
 
-## Running unit tests
+### 2 - API
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Necesita obtener PINATA_API_KEY y PINATA_SECRET_API_KEY creando un proyecto en 
+[Pinata](https://www.pinata.cloud/) y reemplazar los valores en `<PINATA_API_KEY>` y
+`<PINATA_SECRET_API_KEY>`
 
-## Running end-to-end tests
+```sh
+docker pull rogrp6/smmp-api:dev
+docker stop smmp-api # limpieza, ignore si da error
+docker rm smmp-api # limpieza, ignore si da error
+docker run --name smmp-api -d -p 3000:3000 \
+  -e PORT=3000 \
+  -e HOST=0.0.0.0 \
+  -e STAGE=dev \
+  -e PINATA_API_KEY=$PINATA_API_KEY \
+  -e PINATA_SECRET_API_KEY=$PINATA_SECRET_API_KEY \
+  rogrp6/smmp-api:dev
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```batch
+docker pull rogrp6/smmp-api:dev
+docker stop smmp-api # limpieza, ignore si da error
+docker rm smmp-api # limpieza, ignore si da error
+docker run --name smmp-api -d -p 3000:3000 ^
+  -e PORT=3000 ^
+  -e HOST=0.0.0.0 ^
+  -e STAGE=dev ^
+  -e PINATA_API_KEY=%PINATA_API_KEY% ^
+  -e PINATA_SECRET_API_KEY=%PINATA_SECRET_API_KEY% ^
+  rogrp6/smmp-api:dev
+```
 
-## Further help
+### 3 - Web Client
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+3.1- Clonar
+```bash
+git clone https://github.com/sm-marketplace/web-client.git
+cd web-client
+```
+
+3.2- Configurar environment
+```bash
+// src/environments/environment.ts
+  ...
+  API: 'http://127.0.0.1:3000',
+  ...
+```
+
+3.3- Correr
+```
+ng serve -o
+```
