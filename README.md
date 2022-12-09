@@ -33,8 +33,8 @@ rogrp6/smmp-web-client:dev
 
 ## Development
 
-Siga los siguientes pasos para ejecutar el proyecto en su entorno local.
-Para Windows use los script con extension `.cmd` y `.sh` para sistemas linux
+Follow the steps below to run the project in your local environment.
+For Windows use scripts with extension `.cmd` y `.sh` for linux based systems.
 
 1 - Smart contract
 
@@ -43,8 +43,8 @@ Para Windows use los script con extension `.cmd` y `.sh` para sistemas linux
 
 2 - API
 
-Necesita obtener **`PINATA_API_KEY`** y **`PINATA_SECRET_API_KEY`** creando un proyecto en 
-[Pinata](https://www.pinata.cloud/) y setearlo como variables de entorno
+Needs generate **`PINATA_API_KEY`** and **`PINATA_SECRET_API_KEY`** creating a 
+[Pinata](https://www.pinata.cloud/) project and then should set as enviroment variables
 
 `./scripts/up-api.sh`
 
