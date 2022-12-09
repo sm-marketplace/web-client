@@ -38,15 +38,14 @@ For Windows use scripts with extension `.cmd` y `.sh` for linux based systems.
 
 1 - Smart contract
 
-`./scripts/up-sm.sh`
-
+[`./scripts/up-sm.sh`](scripts/up-sm.sh)
 
 2 - API
 
 Needs generate **`PINATA_API_KEY`** and **`PINATA_SECRET_API_KEY`** creating a 
 [Pinata](https://www.pinata.cloud/) project and then should set as enviroment variables
 
-`./scripts/up-api.sh`
+[`./scripts/up-api.sh`](./scripts/up-api.sh)
 
 
 3 - Web Client
