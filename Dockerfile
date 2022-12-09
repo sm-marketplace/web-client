@@ -13,13 +13,13 @@ RUN ng build --configuration development --output-path=/dist
 # Run in NGINX #
 ################
 FROM nginx:alpine
+
 COPY --from=build /dist /usr/share/nginx/html
 COPY --from=build /app/ci/templates /app/ci
 
-# When the container starts, replace the env.js with values from environment variables
 CMD [\
 "/bin/sh",  "-c", "\
-envsubst < /app/ci/__env.js > /usr/share/nginx/html/__env.js &&\
-envsubst < /app/ci/__contract.js > /usr/share/nginx/html/__contract.js &&\
+envsubst < /app/ci/__env.js       > /usr/share/nginx/html/__env.js      &&\
+envsubst < /app/ci/__contract.js  > /usr/share/nginx/html/__contract.js &&\
 exec nginx -g 'daemon off;'\
 "]

@@ -6,23 +6,29 @@
 
 ## Docker (in progress)
 **Require:** contract-artifact.json 
-```
-//contract-artifact.json
-{
-  "network": "localhost", // network 
-  "address": <CONTRACT_ADDRESS>, // address of deployed contract
-  "json": <JSON_CONTRACT_ARTIFACT> // build artifact
-}
 
+For get the contact-artifact.json run:
+
+```bash
+docker run --pull always --rm \
+--entrypoint node \
+rogrp6/smmp-smart-contract:latest \
+get-artifact.js > contract-artifact.json
 ```
 
-```
-sudo docker run --name smmp-web-client -d -p 4200:8443 \
--e CONTRACT_ARTIFACT_STR= $(cat contract-artifact.json) \
--e ENV=DEV
--e PROVIDER=http://localhost:8545
--e API=http://localhost:3000
--e IPFS_FILES_URL=https://ipfs.io/ipfs
+This generates contact-artifact.json in your current directory, then
+you should pass the content as environment variable (CONTRACT_ARTIFACT_STR).
+Needs replace all double quotes characters with simple quote (in bash can 
+use: `sed s/\"/\'/g contract-artifact.json`)
+
+// 80 es el puerto del nginx
+```bash
+sudo docker run --pull always --rm --name smmp-web-client -d -p 4200:80 \
+-e CONTRACT_ARTIFACT_STR="$(sed s/\"/\'/g contract-artifact.json)" \
+-e ENV=DEV \
+-e PROVIDER=https://rpc.ankr.com/eth_goerli \
+-e API=http://ec2-34-238-181-64.compute-1.amazonaws.com \
+-e IPFS_FILES_URL=https://ipfs.io/ipfs \
 rogrp6/smmp-web-client:dev
 ```
 
