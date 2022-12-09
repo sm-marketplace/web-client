@@ -1,13 +1,13 @@
 # SM Marketplace - WebClient
 
-## Requerimientos
+## Requirements
 - Node 16
 - Cuenta en [Pinata](https://www.pinata.cloud/)
 
 ## Docker
 **Require:** contract-artifact.json 
 
-For get the contact-artifact.json run:
+First should run:
 
 ```bash
 docker run --pull always --rm \
@@ -17,7 +17,7 @@ get-artifact.js > contract-artifact.json
 ```
 
 This generates contact-artifact.json in your current directory, then
-you should pass the content as environment variable (CONTRACT_ARTIFACT_STR).
+you should pass the content as environment variable (`CONTRACT_ARTIFACT_STR`).
 Needs replace all double quotes characters with simple quote (in bash can 
 use: `sed s/\"/\'/g contract-artifact.json`)
 
@@ -43,15 +43,15 @@ Para Windows use los script con extension `.cmd` y `.sh` para sistemas linux
 
 2 - API
 
-Necesita obtener `**PINATA_API_KEY**` y `**PINATA_SECRET_API_KEY**` creando un proyecto en 
+Necesita obtener **`PINATA_API_KEY`** y **`PINATA_SECRET_API_KEY`** creando un proyecto en 
 [Pinata](https://www.pinata.cloud/) y setearlo como variables de entorno
 
 `./scripts/up-api.sh`
 
 
-### 3 - Web Client
+3 - Web Client
 
-1- Configurar environment
+3.1- Configurar environment
 ```bash
 // src/environments/environment.ts
   ...
@@ -59,7 +59,7 @@ Necesita obtener `**PINATA_API_KEY**` y `**PINATA_SECRET_API_KEY**` creando un p
   ...
 ```
 
-2- Serve
+3.2- Serve
 ```
 ng serve -o
 ```
