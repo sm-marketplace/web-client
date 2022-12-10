@@ -1,13 +1,26 @@
 
 <h3>Marketplace</h3>
 
-<div *ngIf="itemsToSell$ | async as items" class="wrapper mt-4">
+<div *ngIf="itemsToSell$ | async as items; else noitems" class="wrapper mt-4">
 
   <app-market-item *ngFor="let item of items" class="animate__animated animate__fadeInDown"
   [item]="item"
   ></app-market-item>
 
 </div>
+
+<ng-template #noitems>
+
+  <div class="mt-5">
+    <h2>:(</h2>
+    <div>
+      <h6>No existen items</h6>
+      <a pButton class="p-button-success p-button-text mt-4 create-first" routerLink="/create" label="¡Crea el primero!">
+      </a>
+    </div>
+  </div>
+
+</ng-template>
 
 <!-- <app-market-item></app-market-item> -->
 

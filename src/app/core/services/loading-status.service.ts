@@ -26,5 +26,9 @@ export class LoadingStatusService {
     this.activeCalls--;
     this.handleLoagind();
   }
+
+  getActiveCalls() {
+    return this.activeCalls;
+  }
   
 }
