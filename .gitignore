@@ -6,6 +6,7 @@ accounts.txt
 contract-artifact.json
 __env.js
 __contract.js
+.env.sh
 
 # compiled output
 /dist
