@@ -1,6 +1,6 @@
 import { finalize, map, Observable, of, switchMap, tap } from "rxjs";
 import { LoadingStatusFactory } from "../services/loading.status.factory";
-
+import { LOG } from '../../utils/log.utils'
 export function useLoading() {
   return function (target: any, memberName: string, descriptor: PropertyDescriptor) {
     return {
@@ -11,14 +11,14 @@ export function useLoading() {
           const loadingService = LoadingStatusFactory.controller;
 
           return of('').pipe(
-            tap((_) => console.log('loading...')),
             tap((_) => loadingService.startCall()),
+            tap((_) => LOG.msg(`[Loading] ini | calls: ${loadingService.getActiveCalls()})`, "info")),
 
             switchMap((_) => fn.apply(this, args) as Observable<any>),
 
-            tap((_) => console.log('loading finish')),
             finalize(() => {
               loadingService.endCall()
+              LOG.msg(`[Loading] end | calls: ${loadingService.getActiveCalls()})`, "info")
             })
           );
         }
