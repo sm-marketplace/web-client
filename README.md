@@ -50,12 +50,20 @@ Needs generate **`PINATA_API_KEY`** and **`PINATA_SECRET_API_KEY`** creating a
 
 3 - Web Client
 
-3.1- Configurar environment
+3.1- Set env vars
 ```bash
-// src/environments/environment.ts
-  ...
-  API: 'http://127.0.0.1:3000',
-  ...
+export ENV=DEV
+export CHAINS_ID='0x13881', '0x5', '0x539'
+export PROVIDER_URL=https://rpc.ankr.com/eth_goerli
+export API=http://ec2-34-238-181-64.compute-1.amazonaws.com
+export IPFS_FILES_URL=https://ipfs.io/ipfs
+export CONTRACT_ARTIFACT_STR=$(<contract-artifact.json)
+```
+
+3.2- Generate __contract.js and __env.js
+```bash
+envsubst < ./ci/templates/__contract.js  > ./src/$PROJECT_NAME/__contract.js
+envsubst < ./ci/templates/__env.js       > ./src/$PROJECT_NAME/__env.js
 ```
 
 3.2- Serve
