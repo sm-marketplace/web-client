@@ -40,6 +40,18 @@ jobs:
     - name: Build
       run: npm run build:dev
 
+    - name: Get contract artifact
+      run: |
+        docker run --pull always --rm \
+        --entrypoint node \
+        rogrp6/smmp-smart-contract:latest \
+        get-artifact.js > contract-artifact.json
+
+    - name: Set contract artifact vars
+      run: |
+        export CONTRACT_ARTIFACT_STR=$(<contract-artifact.json)
+        envsubst < ./ci/templates/__contract.js  > ./dist/$PROJECT_NAME/__contract.js
+
     - name: Deploy
       if: success()
       run: aws s3 sync ./dist/$PROJECT_NAME s3://$BUCKET_NAME
