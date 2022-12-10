@@ -4,6 +4,8 @@
 *.priv*
 accounts.txt
 contract-artifact.json
+__env.js
+__contract.js
 
 # compiled output
 /dist
