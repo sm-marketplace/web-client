@@ -1,9 +1,12 @@
 name: Deploy (PROD)
 
 env:
+  DOCKER_IMAGE: rogrp6/smmp-web-client
+  DOCKER_TAG: latest
   STAGE: PROD
   BUCKET_NAME: smmp-web-client-prod
   PROJECT_NAME: web-client
+  CLOUDFRONT_ID: ERLJJ28QGEOP
 
 on:
   push:
@@ -38,6 +41,41 @@ jobs:
     - name: Build
       run: npm run build:prod
 
+    - name: Get contract artifact
+      run: |
+        docker run --pull always --rm \
+        --entrypoint node \
+        rogrp6/smmp-smart-contract:latest \
+        get-artifact.js > contract-artifact.json
+
+    - name: Set contract artifact and env vars
+      env:
+        ENV: PROD
+        CHAINS_ID: "'0x13881','0x5','0x539'"
+        PROVIDER_URL: https://rpc.ankr.com/eth_goerli
+        API: http://ec2-3-226-6-32.compute-1.amazonaws.com
+        IPFS_FILES_URL: https://ipfs.io/ipfs
+      run: |
+        export CONTRACT_ARTIFACT_STR=$(<contract-artifact.json)
+        envsubst < ./ci/templates/__contract.js  > ./dist/$PROJECT_NAME/__contract.js
+        envsubst < ./ci/templates/__env.js       > ./dist/$PROJECT_NAME/__env.js
+
+    - name: Build the Docker image
+      run: docker build . -t $DOCKER_IMAGE:$DOCKER_TAG
+      
+    - name: Docker Login
+      uses: docker/login-action@v2.1.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Push the Docker image
+      run: docker push $DOCKER_IMAGE:$DOCKER_TAG
+
     - name: Deploy
       if: success()
       run: aws s3 sync ./dist/$PROJECT_NAME s3://$BUCKET_NAME
+
+    - name: Clean Cloudfront cache
+      if: success()
+      run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*"

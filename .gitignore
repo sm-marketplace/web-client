@@ -1,5 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+/trash
+*.priv*
+accounts.txt
+contract-artifact.json
+__env.js
+__contract.js
+.env.sh
+
 # compiled output
 /dist
 /tmp

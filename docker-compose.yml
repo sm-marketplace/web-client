@@ -1,0 +1,17 @@
+# TODO
+# version: "1.29.2"
+# services:
+#   smart-contract:
+#     image: rogrp6/smmp-smart-contract
+#     container_name: smmp-smart-contract
+#     restart: always
+#     ports:
+#       - 8545:8545
+
+#   smart-contract-artifacts:
+#     image: rogrp6/smmp-smart-contract
+#     depends_on:
+#       - smart-contract
+#     restart: no
+#     entrypoint: entrypoint
+    

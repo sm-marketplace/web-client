@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-layout',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
+
+  env = environment;
 
   constructor(
     private router: Router,
@@ -18,5 +21,4 @@ export class MainLayoutComponent implements OnInit {
   goHome() {
     this.router.navigate(['/']);
   }
-
 }
