@@ -7,7 +7,7 @@ env:
   DOCKER_IMAGE_TAG: dev
   BUCKET_NAME: smmp-web-client-dev
   PROJECT_NAME: web-client
-  CLOUDFRONT_ID: ERLJJ28QGEOP
+  CLOUDFRONT_ID: E3QHZHQDH76282
   SMART_CONTRACT_DOCKER: rogrp6/smmp-smart-contract:latest
   API_URL: http://ec2-3-216-199-173.compute-1.amazonaws.com
   PROVIDER_URL: https://rpc.ankr.com/eth_goerli
