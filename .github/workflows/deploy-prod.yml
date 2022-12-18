@@ -70,7 +70,7 @@ jobs:
         envsubst < ./ci/templates/__env.js       > ./dist/$PROJECT_NAME/__env.js
 
     - name: Build the Docker image
-      run: docker build . -t $DOCKER_IMAGE:$DOCKER_TAG
+      run: docker build . -t $DOCKER_IMAGE:$DOCKER_IMAGE_TAG
       
     - name: Docker Login
       uses: docker/login-action@v2.1.0
@@ -79,7 +79,7 @@ jobs:
         password: ${{ env.DOCKER_PASSWORD }}
         
     - name: Push the Docker image
-      run: docker push $DOCKER_IMAGE:$DOCKER_TAG
+      run: docker push $DOCKER_IMAGE:$DOCKER_IMAGE_TAG
 
     - name: Deploy
       if: success()
