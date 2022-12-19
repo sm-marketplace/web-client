@@ -8,7 +8,7 @@ const artifactStr = JSON.stringify(artifact);
 const contents = readFileSync(templatePath, 'utf-8');
 
 const result = contents.replace(
-  "JSON.parse(\"${CONTRACT_ARTIFACT_STR}\")",
+  "${CONTRACT_ARTIFACT_STR}",
   artifactStr,
 );
 
