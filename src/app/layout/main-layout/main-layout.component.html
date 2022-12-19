@@ -4,7 +4,10 @@
   </div>
   
   <div class="p-toolbar-group-right">
-    <a pButton routerLink="home" label="Shop" class="p-button-link" icon="pi pi-shopping-cart"
+    <a pButton routerLink="my-nfts" label="Mis NFTs" class="p-button-link" icon="pi pi-heart-fill"
+    [class.p-button-sm]="['xs'] | breakpoint | async"
+    ></a>
+    <a pButton routerLink="home" label="Comprar" class="p-button-link" icon="pi pi-shopping-cart"
     [class.p-button-sm]="['xs'] | breakpoint | async"
     ></a>
     <a pButton routerLink="create" label="Crear" class="p-button-link" icon="pi pi-plus"

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IpfsURIPipe } from 'src/app/core/pipes/ipfs-uri.pipe';
 
 @Component({
@@ -9,6 +9,8 @@ import { IpfsURIPipe } from 'src/app/core/pipes/ipfs-uri.pipe';
 })
 export class MarketItemComponent implements OnInit {
 
+  @Output() onBuy = new EventEmitter();
+  @Output() onDetails = new EventEmitter();
   @Input() set item(val: any) {
     this._item = val;
     this.elem.nativeElement.style.setProperty(
@@ -25,4 +27,11 @@ export class MarketItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleBuy() {
+    this.onBuy.emit();
+  }
+
+  handleDetails() {
+    this.onDetails.emit();
+  } 
 }

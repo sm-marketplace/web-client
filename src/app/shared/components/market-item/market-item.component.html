@@ -8,10 +8,20 @@
     <button pButton pRipple type="button" 
     icon="pi pi-eye" 
     class="p-button-rounded p-button-text"
+    (click)="handleDetails()"
     ></button>
     <button pButton 
+    *ngIf="!_item.sold"
     class="p-button-outlined p-button-success" 
     label="Comprar" 
+    icon="pi pi-check"
+    (click)="handleBuy()"
+    ></button>
+    <button pButton 
+    *ngIf="_item.sold"
+    class="p-button-outlined p-button-info"
+    disabled
+    label="Comprado"
     icon="pi pi-check"
     ></button>
   </ng-template>

@@ -18,6 +18,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { LoadingStatusFactory } from './core/services/loading.status.factory';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { MyNftsComponent } from './pages/my-nfts/my-nfts.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
     AuthComponent,
     CreateComponent,
     MainLayoutComponent,
+    MyNftsComponent,
   ],
   imports: [
     BrowserModule,

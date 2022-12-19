@@ -10,12 +10,12 @@ docker run --pull allways --rm -d ^
 %IMAGE%
 
 @REM Deploy contract on container network 
-docker exec -it %CONTAINER_NAME% /bin/sh -c "^
-cd /usr/src/app; ^
-npx hardhat run scripts/deploy.js --network localhost"
+docker exec -it %CONTAINER_NAME% /bin/sh -c ^
+"cd /usr/src/app; npx hardhat run scripts/deploy.js --network localhost"
 
 @REM Generate contract-artifact.json file
-docker exec -it %CONTAINER_NAME% /bin/sh -c "node get-artifact.js" > contract-artifact.json
+docker exec -it %CONTAINER_NAME% /bin/sh -c ^
+"node get-artifact.js" > contract-artifact.json
 
 @REM Use contract-artifact.json for generate __contract.js
 node __contract.make.js > src\__contract.js

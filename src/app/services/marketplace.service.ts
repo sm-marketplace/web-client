@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, forkJoin, map, of, switchMap, tap } from "rxjs";
 import { useLoading } from "../core/decorators/catch-loading.decorator";
 import { IPinataMetadata } from "../core/interfaces/pinata-metadata.interface";
-import { ContractService } from "./contract.service";
-import { HttpPinataService } from "./http-pinata.service";
+import { RpcContractService } from "./external/rpc-contract.service";
+import { HttpPinataService } from "./external/http-pinata.service";
+import { MarketItem } from "../core/models/market-item";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,13 @@ export class MarketplaceService {
   itemsToSell = new BehaviorSubject<any[] | undefined>(undefined); 
   itemsToSell$ = this.itemsToSell.asObservable();
 
+  myItems = new BehaviorSubject<any[] | undefined>(undefined); 
+  myItems$ = this.myItems.asObservable();
+
+  itemsDict: any = {};
+
   constructor(
-    private contract: ContractService,
+    private contract: RpcContractService,
     private httpPinataService: HttpPinataService) {
     
     this.fetch().subscribe();
@@ -37,6 +43,17 @@ export class MarketplaceService {
     )
   }
 
+  @useLoading()
+  buyItem(id: string) {
+    const item = this.itemsDict[id];
+    const amount = item['price'];
+
+    return this.contract.mpBuyAsset(amount, { id }).pipe(
+      switchMap(_ => this.fetchItemsToSell()),
+    )
+  }
+
+  @useLoading()
   fetch() {
     return forkJoin({
       c: this.fetchCommission(),
@@ -44,79 +61,99 @@ export class MarketplaceService {
     })
   }
 
-  getCommission() {
-    return this.commission.getValue();
-  }
-
+  @useLoading()
   fetchCommission() {
     return this.contract.mpGetTxCommission().pipe(
         tap(value => this.commission.next(<string>value)),
       );
   }
 
-  getItemsToSell() {
-    return this.itemsToSell.getValue();
+  @useLoading()
+  fetchMyItems() {
+    return this.contract.mpGetMyAssetsToSell().pipe(
+      tap(items => console.log({items})),
+      map(ctrcItems => ctrcItems.map(item => new MarketItem(item))),
+      switchMap(
+        ctrcItems => forkJoin(
+          ctrcItems.map( item => this._loadMarketitem(item) )
+        ),
+      ),
+      tap(items => this.myItems.next(<any[]>items)),
+    )
   }
 
-  // TODO: Refactor
   @useLoading()
   fetchItemsToSell() {
     return this.contract.mpGetAllItemsToSell().pipe(
 
-      map(items => items.map(item => this.parseItem(item))),
-      
-      switchMap(items => forkJoin({
-        items: of(items),
-        itemsURI: forkJoin(items.map(
-          item => this.contract.getTokenURI(item.id)
-        )),
-      })),
-      
-      map(({items, itemsURI}) => items.map(
-        (item, idx) => ({
-          ...item, 
-          uri: itemsURI[idx], 
-          hash: (<string>itemsURI[idx]).replace('ipfs://', '')
-        }),
-      )),
+      map(ctrcItems => ctrcItems.map(item => new MarketItem(item))),
 
-      switchMap(items => forkJoin({
-        items: of(items),
-        itemsMetadata: forkJoin(items.map(
-          item => this.httpPinataService.getFile(item.hash)
-        )),
-      })),
-
-      map(({items, itemsMetadata}) => items.map(
-        (item, idx) => {
-          const metadata = (<any>itemsMetadata[idx])?.item?.metadata;
-          return {
-            ...item, 
-            metadata: {
-              filename: metadata?.name,
-              ...metadata?.keyvalues
-            }, 
-          }
-        },
-      )),
+      switchMap(
+        ctrcItems => forkJoin(
+          ctrcItems.map( item => this._loadMarketitem(item) )
+        ),
+      ),
       
-      tap(items => this.itemsToSell.next(<any[]>items))
+      tap(items => this.itemsDict = this._getItemsDict(items)),
+      tap(items => this.itemsToSell.next(<any[]>items)),
     );
   }
 
-  parseItem(item: any[]) {
-    // uint256 id;
-    // address payable seller;
-    // address payable owner;
-    // uint256 price;
-    // bool sold;
-    return {
-      id: item[0],
-      seller: item[1],
-      owner: item[2],
-      price: item[3],
-      sold: item[4],
-    }
+  /**
+   * @returns Cache of items to sell
+   */
+  getItemsToSell() {
+    return this.itemsToSell.getValue();
   }
 
+  /**
+   * @returns Cache of commission
+   */
+  getCommission() {
+    return this.commission.getValue();
+  }
+
+  // Utils
+  _loadMarketitem(ctrcItem: any) {
+
+    let item = ctrcItem;
+
+    return of(item).pipe(
+      // Load URI
+      switchMap(item => this.contract.getTokenURI(item.id)),
+      
+      // Set props
+      tap(uri => item = ({
+        ...item,
+        uri, 
+        hash: (<string>uri).replace('ipfs://', ''),
+      })),
+
+      // Load Metadata
+      switchMap(_ => this.httpPinataService.getFile(item.hash)),
+      
+      // Set props
+      map((res: any) => res?.item?.metadata),
+      map((metadata: any) => item = ({
+        ...item, 
+        metadata: {
+          filename: metadata?.name,
+          ...metadata?.keyvalues
+        }, 
+      }))
+    )
+
+  }
+
+  // Utils
+  _getItemsDict(items: MarketItem[], key: keyof MarketItem = 'id') {
+    const dict: any = {};
+
+    items.forEach(item => {
+      dict[item[key]] = item
+    })
+
+
+    return dict;
+  }
 }

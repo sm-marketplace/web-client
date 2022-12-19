@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { MarketplaceService } from 'src/app/services/marketplace.service';
 
 @Component({
@@ -11,13 +11,21 @@ export class HomeComponent implements OnInit {
 
   commission$ = this.mpService.commission$;
   itemsToSell$ = this.mpService.itemsToSell$.pipe(
-    map(items => items && [...items].reverse())
+    map(items => items && [...items].reverse()),
   );
 
-  constructor(private mpService: MarketplaceService) {
+  constructor(private mpService: MarketplaceService) {    
   }
 
   ngOnInit(): void {
   }
 
+  handleBuy(id: string) {
+    this.mpService.buyItem(id).subscribe();
+  }
+
+  handleDetails(id: string) {
+    // TODO: Implement
+    console.log("Details of", id);
+  }
 }

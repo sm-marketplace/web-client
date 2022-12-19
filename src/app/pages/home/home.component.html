@@ -5,6 +5,8 @@
 
   <app-market-item *ngFor="let item of items" class="animate__animated animate__fadeInDown"
   [item]="item"
+  (onBuy)="handleBuy(item.id)"
+  (onDetails)="handleDetails(item.id)"
   ></app-market-item>
 
 </div>
@@ -21,6 +23,7 @@
   </div>
 
 </ng-template>
+
 
 <!-- <app-market-item></app-market-item> -->
 

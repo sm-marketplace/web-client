@@ -62,8 +62,8 @@ export CONTRACT_ARTIFACT_STR=$(<contract-artifact.json)
 
 3.2- Generate __contract.js and __env.js
 ```bash
-envsubst < ./ci/templates/__contract.js  > ./src/$PROJECT_NAME/__contract.js
-envsubst < ./ci/templates/__env.js       > ./src/$PROJECT_NAME/__env.js
+envsubst < ./ci/templates/__contract.js  > ./src/__contract.js
+envsubst < ./ci/templates/__env.js       > ./src/__env.js
 ```
 
 3.2- Serve
