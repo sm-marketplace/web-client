@@ -10,6 +10,20 @@
   <script src="__env.js"></script>
   <script src="__contract.js"></script>
 
+  <script src="//unpkg.com/moesif-browser-js@^1/moesif.min.js"></script>
+  <script>
+
+    if (window.__env['ENV']=='PROD') {
+      var options = {
+        applicationId: 'eyJhcHAiOiIyMzc6Mjk4IiwidmVyIjoiMi4wIiwib3JnIjoiMTA0NzoyNjIiLCJpYXQiOjE2Njk4NTI4MDB9.cXZwk_OXqY980LbUBeODjZFU0CG7TBUpHPPMEkR8Izg',
+        // add other option here.
+      };
+      moesif.init(options);
+      // Start capturing Ethereum Web3 and AJAX API Calls.
+      console.log("Moesif Monitor running...")
+      moesif.start();
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>

@@ -29,6 +29,7 @@
     "bootstrap": "^5.2.3",
     "ethers": "^5.7.2",
     "jquery": "^3.6.1",
+    "moesif-browser-js": "^1.8.11",
     "ngx-toastr": "^11.3.3",
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",
